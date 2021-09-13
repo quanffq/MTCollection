@@ -1,0 +1,7 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'MTCollection_Example' do
+  pod 'MTCollection', :path => '../'
+end

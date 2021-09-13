@@ -1,0 +1,6 @@
+framework module MTCollection {
+  umbrella header "MTCollection-umbrella.h"
+
+  export *
+  module * { export * }
+}

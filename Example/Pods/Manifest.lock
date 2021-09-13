@@ -1,0 +1,23 @@
+PODS:
+  - MTCollection (0.1.0):
+    - SnapKit
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - MTCollection (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  MTCollection:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MTCollection: 00d8854e79d34b9195d6f700eca6b075c1ee94ad
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: 4a39e43446e6219d67c584566902d7b76bbc623a
+
+COCOAPODS: 1.10.1

@@ -69,6 +69,8 @@ public class MTCollectionView: QView {
     public private(set) var allowSelect: Bool = true
     /// 允许回调取消选中
     public var cancelSelect: Bool = false
+    /// 默认选中
+    public var defaultSelect: IndexPath?
     
 //    public private(set) var allowCancelBool: 
     /// 不参与单选，可以实现取消
@@ -208,10 +210,14 @@ extension MTCollectionView: UICollectionViewDataSource, UICollectionViewDelegate
         let model = data[indexPath.row]
         cell.allowSelect = self.allowSelect
         cell.setValue(model: model)
+        if let selectIndex = defaultSelect, indexPath == selectIndex {
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+            defaultSelect = nil
+        }
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = data[indexPath.row]
         self.delegate?.colletionMessageCallback(dictioanry: [.mt_mask: self.mt_mask, .index: indexPath, .model: model, .isSelect: true])
         for index in allowCancelIndexs {
@@ -224,7 +230,7 @@ extension MTCollectionView: UICollectionViewDataSource, UICollectionViewDelegate
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard cancelSelect else { return }
         let model = data[indexPath.row]
         self.delegate?.colletionMessageCallback(dictioanry: [.mt_mask: self.mt_mask, .index: indexPath, .model: model, .isSelect: false])
@@ -241,6 +247,11 @@ extension MTCollectionView: NSCollectionViewDelegate, NSCollectionViewDataSource
         let cell = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: self.reuseIdentifier), for: indexPath) as! MTDefaultCollectionCell
         cell.allowSelect = self.allowSelect
         cell.setValue(model: model)
+        if let selectIndex = defaultSelect, indexPath == selectIndex {
+            collectionView.selectionIndexPaths = [selectIndex]
+            cell.isSelected = true
+            defaultSelect = nil
+        }
         return cell
     }
     

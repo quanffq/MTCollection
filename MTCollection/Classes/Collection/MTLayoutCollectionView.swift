@@ -17,7 +17,7 @@ public class MTLayoutCollectionView: MTCollectionView {
 }
 #if os(iOS)
 extension MTLayoutCollectionView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard  let title = data[indexPath.item].title else {
             return (self.layout as? UICollectionViewFlowLayout)?.itemSize ?? .zero
         }

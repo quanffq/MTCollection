@@ -10,9 +10,9 @@ import UIKit
 #else
 import Cocoa
 #endif
-class MTTextCollectionCell: MTDefaultCollectionCell {
+public class MTTextCollectionCell: MTDefaultCollectionCell {
     
-    override func setUp() {
+    public override func setUp() {
         #if os(iOS)
         let layer = self.layer
         layer.cornerRadius = 5

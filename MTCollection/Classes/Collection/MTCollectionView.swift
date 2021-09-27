@@ -35,11 +35,11 @@ public protocol MTCollectionDelegate: AnyObject {
 }
 
 public struct MTCollectionModel {
-    var imageName: String?
-    var image: QImage?
-    var title: String?
-    var object: Any?
-    var tag: Int = -1
+   public var imageName: String?
+   public var image: QImage?
+   public var title: String?
+   public var object: Any?
+   public var tag: Int = -1
 }
 
 public enum MTCollectionParameter: String {
@@ -58,7 +58,7 @@ public class MTCollectionView: QView {
     public var cell: MTDefaultCollectionCell!
     
     ///代理
-    weak var delegate: MTCollectionDelegate?
+    public weak var delegate: MTCollectionDelegate?
     /// 数据
     public private(set) var data: [MTCollectionModel] = []
     /// 标记
@@ -77,7 +77,7 @@ public class MTCollectionView: QView {
     
     //MARK: - Init
     //MARK:
-    init(layout: QCollectionViewLayout? = nil, cell: MTDefaultCollectionCell? = nil ) {
+    public init(layout: QCollectionViewLayout? = nil, cell: MTDefaultCollectionCell? = nil ) {
         super.init(frame: .zero)
         self.layout = layout ?? defaultLayout()
         self.cell = cell ?? MTDefaultCollectionCell.init()

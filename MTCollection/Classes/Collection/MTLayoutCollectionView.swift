@@ -10,7 +10,7 @@ import UIKit
 import Cocoa
 #endif
 
-class MTLayoutCollectionView: MTCollectionView {
+public class MTLayoutCollectionView: MTCollectionView {
 
 
     
@@ -29,7 +29,7 @@ extension MTLayoutCollectionView: UICollectionViewDelegateFlowLayout {
 }
 #else
 extension MTLayoutCollectionView: NSCollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+    public func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
         guard  let title = data[indexPath.item].title else {
             return (self.layout as? NSCollectionViewFlowLayout)?.itemSize ?? .zero
         }

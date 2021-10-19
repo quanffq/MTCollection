@@ -40,6 +40,7 @@ public struct MTCollectionModel {
    public var title: String?
    public var object: Any?
    public var tag: Int = -1
+   public init() {}
 }
 
 public enum MTCollectionParameter: String {

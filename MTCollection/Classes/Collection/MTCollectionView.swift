@@ -76,8 +76,8 @@ public class MTCollectionView: QView {
 //    public private(set) var allowCancelBool: 
     /// 不参与单选，可以实现取消
     private var allowCancelIndexs: [Int] = []
-    
-    
+    /// 初始化设置选中
+    private var selectRow: Int = -1
     //MARK: - Init
     //MARK:
     public init(layout: QCollectionViewLayout? = nil, cell: MTDefaultCollectionCell? = nil ) {
@@ -164,8 +164,14 @@ extension MTCollectionView {
     
     public func selectRow(_ at: Int) {
         #if os(iOS)
+        if collection.visibleCells.count == 0 {
+            selectRow = at
+        }
         collection.selectItem(at: IndexPath.init(row: at, section: 0), animated: false, scrollPosition: .centeredVertically)
         #else
+        if collection.visibleItems().count == 0 {
+            selectRow = at
+        }
         collection.selectItems(at: [IndexPath.init(item: at, section: 0)], scrollPosition: .centeredVertically)
         #endif
     }
@@ -215,6 +221,9 @@ extension MTCollectionView: UICollectionViewDataSource, UICollectionViewDelegate
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
             defaultSelect = nil
         }
+        if indexPath.row == selectRow {
+            cell.isSelected = true
+        }
         return cell
     }
     
@@ -228,6 +237,11 @@ extension MTCollectionView: UICollectionViewDataSource, UICollectionViewDelegate
                     collection.deselectItem(at: IndexPath.init(row: row, section: 0), animated: false)
                 }
             }
+        }
+        if selectRow != -1 && selectRow != indexPath.row {
+            let cell = collection.cellForItem(at: IndexPath(item: selectRow, section: 0))
+            cell?.isSelected = false
+            selectRow = -1
         }
     }
     
@@ -253,6 +267,9 @@ extension MTCollectionView: NSCollectionViewDelegate, NSCollectionViewDataSource
             cell.isSelected = true
             defaultSelect = nil
         }
+        if indexPath.item == selectRow {
+            cell.isSelected = true
+        }
         return cell
     }
     
@@ -267,6 +284,11 @@ extension MTCollectionView: NSCollectionViewDelegate, NSCollectionViewDataSource
                     collection.deselectItems(at: [IndexPath.init(item: row, section: 0)])
                 }
             }
+        }
+        if selectRow != -1 && selectRow != item {
+            let cell = collection.item(at: IndexPath(item: selectRow, section: 0))
+            cell?.isSelected = false
+            selectRow = -1
         }
     }
     

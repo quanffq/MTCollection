@@ -1,7 +1,8 @@
 use_frameworks!
 
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'MTCollection_Example' do
   pod 'MTCollection', :path => '../'
+  pod 'SnapKit'
 end
